@@ -1,0 +1,3 @@
+'use strict';
+const missionToggle=document.getElementById('missionToggle'),missionDetails=document.getElementById('missionDetails');
+missionToggle.addEventListener('click',()=>{const expanded=missionToggle.getAttribute('aria-expanded')!=='true';missionToggle.setAttribute('aria-expanded',String(expanded));missionToggle.textContent=expanded?'طيّ ▴':'تفاصيل ▾';missionToggle.setAttribute('aria-label',expanded?'طيّ تفاصيل المهمة':'عرض تفاصيل المهمة');missionDetails.hidden=!expanded;});

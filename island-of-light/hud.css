@@ -1,0 +1,15 @@
+/* Keep objectives near the edge and leave the playable world clear. */
+.playing .identity{display:none}
+.mission{top:85px;left:20px;right:auto;transform:none;width:280px;padding:10px 13px;border-radius:15px;background:#114e64ed;box-shadow:0 7px 24px #18465c24}
+.mission-heading{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:10px;min-height:36px}
+#chapter{font-size:13px;font-weight:700;line-height:1.5}
+.mission #count{float:none;font-size:14px;white-space:nowrap}
+#missionToggle{padding:8px 9px;min-width:44px;min-height:36px;font-size:11px;border-radius:9px;color:#e5fff8;background:#ffffff16;box-shadow:none;border:1px solid #ffffff35}
+#missionToggle:hover{background:#ffffff2b}
+.mission .track{height:4px;margin:5px 0 0}
+#missionDetails{padding:9px 0 3px}
+.mission .steps{margin:0 0 8px;gap:5px}
+.mission .steps span{font-size:10px;padding:5px 3px}
+.mission #hint{font-size:11px;line-height:1.6}
+@media(max-width:700px){.mission{top:70px;left:12px;right:12px;width:auto;padding:7px 11px}.mission-heading{gap:8px;min-height:32px}#chapter{font-size:12px}#missionToggle{padding:6px 10px;min-height:32px}.mission .track{margin-top:3px;height:3px}#missionDetails{padding:8px 0 2px}.mission .steps span{font-size:10px}}
+@media(max-height:600px){header{top:10px;left:14px;right:14px}header a img{height:35px;width:54px}header button{padding:8px 10px;font-size:11px}.mission{top:67px;left:14px;right:auto;width:270px;padding:6px 10px}#missionDetails{max-height:105px;overflow:auto}#map{width:85px;height:85px;bottom:15px;left:14px}#pad{bottom:15px;right:14px;grid-template-columns:repeat(3,40px);gap:4px}#pad button{height:37px;font-size:21px}.controls,#routeStatus{display:none}.guide-row{right:14px;left:auto;bottom:110px;transform:none}#guide{padding:8px 13px;font-size:12px}#toast{font-size:16px;padding:12px 20px;top:45%}}
