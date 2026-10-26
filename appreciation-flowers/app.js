@@ -3,12 +3,12 @@
   const {groups, schoolLogo} = window.FLOWER_DATA;
   const $ = id => document.getElementById(id);
   const palettes = [
-    {light:'#f0b6bd',dark:'#af526a',wash:'#edcbd0'},
-    {light:'#f6ccac',dark:'#cb8769',wash:'#f0ddc8'},
-    {light:'#d3c0dc',dark:'#9b7ba6',wash:'#e0d3e6'},
-    {light:'#f3dba1',dark:'#c5a267',wash:'#efe3bc'},
-    {light:'#eab5c8',dark:'#bd6f91',wash:'#eed4de'},
-    {light:'#d8dca9',dark:'#9ba467',wash:'#e2e6c3'}
+    {light:'#f889b2',dark:'#b82e65',wash:'#f6d4e3'},
+    {light:'#ffc59a',dark:'#d67543',wash:'#ffe7d3'},
+    {light:'#d4aff1',dark:'#9866be',wash:'#ece0fa'},
+    {light:'#ffe2a2',dark:'#c99932',wash:'#fff0cc'},
+    {light:'#f69dc9',dark:'#bb4f91',wash:'#f8d9ec'},
+    {light:'#addcd0',dark:'#4e9b86',wash:'#dcf0e8'}
   ];
   const arabic = new Intl.NumberFormat('ar');
   let activeGroup = null, activeStudent = null, lastFlower = null;
@@ -92,7 +92,7 @@
       button.dataset.student=String(i); button.classList.toggle('opened',opened.has(key(i)));
       button.style.setProperty('--wash',palettes[i%palettes.length].wash); button.style.setProperty('--delay',`${-(i%7)*.8}s`);
       button.setAttribute('aria-label',`افتح زهرة التقدير للطالب ${name}`);
-      const art=document.createElement('span'); art.className='flower-art'; art.innerHTML=flowerSvg(i,`garden-${activeGroup.id}-${i}`)+'<span class="mini-letter" aria-hidden="true">♡</span>';
+      const art=document.createElement('span'); art.className='flower-art'; art.dataset.flower3d=String(i); art.innerHTML=flowerSvg(i,`garden-${activeGroup.id}-${i}`)+'<span class="mini-letter" aria-hidden="true">♡</span>';
       const label=document.createElement('span'); label.className='student-name'; label.textContent=name;
       const hint=document.createElement('span'); hint.className='flower-invite'; hint.textContent=opened.has(key(i))?'✓ أزهرت رسالتك · افتحها مجددًا':'المس زهرتك لتتفتح';
       button.append(art,label,hint); button.onclick=()=>openFlower(i,button); grid.append(button);
@@ -100,6 +100,7 @@
     $('emptyState').hidden=count!==0;
     $('resultCount').textContent=`${arabic.format(count)} من ${arabic.format(activeGroup.students.length)} زهرة`;
     $('bloomCount').textContent=arabic.format(activeGroup.students.filter((_,i)=>opened.has(key(i))).length);
+    window.Flower3D?.sync();
   }
   function openFlower(index,button) {
     if(busy) return;
@@ -115,7 +116,10 @@
     if(lastFlower) {lastFlower.classList.remove('blooming');lastFlower.classList.add('opened');lastFlower.removeAttribute('aria-busy');}
     $('cardName').textContent=activeStudent.name;
     $('cardClass').textContent=`${activeStudent.group.title} · الشعبة ${activeStudent.group.section}`;
-    $('certificateFlower').innerHTML=flowerSvg(activeStudent.index,'award-flower'); $('certificateFlower').classList.add('is-open');
+    $('certificateFlower').replaceChildren();
+    if(window.Flower3D){const image=new Image();image.src=Flower3D.snapshot(activeStudent.index);image.alt='';image.className='flower-portrait';$('certificateFlower').append(image);}
+    else $('certificateFlower').innerHTML=flowerSvg(activeStudent.index,'award-flower');
+    $('certificateFlower').classList.add('is-open');
     $('cardDialog').showModal();$('cardDialog').scrollTop=0;document.body.classList.add('dialog-open');
     $('closeCard').focus({preventScroll:true});petalShower();
   }
@@ -182,7 +186,8 @@
       svg=svg.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ').replace('viewBox="0 0 200 260"','viewBox="0 0 200 180"');
       svg=svg.replace(/(<\/defs>)[\s\S]*?(?=<g class="petal)/,'$1');
       svg=svg.replace(/<g class="petal (inner-petal)?" style="--a:([^d]+)deg">/g,(_,inner,angle)=>`<g transform="rotate(${angle} 100 100)${inner?' translate(100 100) scale(.72) translate(-100 -100)':''}">`);
-      const art=await svgImage(svg);x.drawImage(art,610,345,280,252);
+      if(window.Flower3D){const art=new Image();art.src=Flower3D.snapshot(selected.index);await art.decode();x.drawImage(art,600,330,300,300);}
+      else {const art=await svgImage(svg);x.drawImage(art,610,345,280,252);}
       put('بطاقة شكر وتقدير',655,27,'#a48a60');put('أزهرتَ حضورًا.',765,85,'#a15368');put('إلى طالبنا العزيز',850,28,'#97917d');
       let font=66,nameLines;
       do{x.font=`bold ${font}px Tahoma,Arial`;nameLines=wrapText(x,selected.name,1190);if(nameLines.length<=2)break;font-=2;}while(font>40);

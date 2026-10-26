@@ -7,8 +7,11 @@
   <meta name="description" content="حديقة صغيرة تزهر بحضورك. افتح زهرتك واكتشف بطاقة شكر خاصة بك من مدارس غراس الأخلاق.">
   <title>أزهار التقدير — غراس الأخلاق</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="enhancements.css">
   <script src="data.js" defer></script>
+  <script src="vendor/three.min.js" defer></script>
   <script src="app.js" defer></script>
+  <script src="flowers-3d.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -34,7 +37,7 @@
         <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
         <span class="art-caption">تنمو بالحبّ. تزهر بالتقدير.</span>
         <span class="floating-spark spark-one">✧</span><span class="floating-spark spark-two">✧</span>
-        <div class="hero-bouquet" id="heroBouquet"></div>
+      <div class="hero-bouquet" id="heroBouquet" data-flower3d="-1"></div>
         <div class="hero-message"><span>رسالة من معلّمك</span><b>شكرًا لأنك هنا.</b><i aria-hidden="true">♡</i></div>
         <span class="garden-ground"></span>
       </div>
