@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f5ed">
+  <meta name="description" content="حديقة صغيرة تزهر بحضورك. افتح زهرتك واكتشف بطاقة شكر خاصة بك من مدارس غراس الأخلاق.">
+  <title>أزهار التقدير — غراس الأخلاق</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="enhancements.css">
+  <script src="data.js" defer></script>
+  <script src="vendor/three.min.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="flowers-3d.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" id="brandHome" aria-label="أزهار التقدير — الصفحة الرئيسية">
+      <img class="school-logo" alt="مدارس غراس الأخلاق" width="84" height="58">
+      <span><strong>أزهار التقدير</strong><small>غراس الأخلاق</small></span>
+    </a>
+    <div class="settings" aria-label="إعدادات الحديقة">
+      <button id="soundToggle" class="quiet-button" type="button" aria-pressed="false"><span aria-hidden="true">♫</span> الصوت</button>
+      <button id="motionToggle" class="quiet-button" type="button" aria-pressed="true"><span aria-hidden="true">✧</span> الحركة</button>
+    </div>
+  </header>
+  <main>
+    <section id="home" class="home" aria-labelledby="homeTitle">
+      <div class="hero-copy">
+        <span class="eyebrow"><i></i> لكل حضورٍ جميل… زهرة</span>
+        <h1 id="homeTitle">بحضورك،<br> تزهر <em>حديقتنا.</em></h1>
+        <p class="hero-description">هنا تنمو كلمات الشكر على هيئة أزهار.<br>اختر صفّك، وابحث عن زهرتك…<br>ففي قلبها رسالة لك وحدك.</p>
+        <a class="primary hero-link" href="#classChoices">اكتشف زهرتك <span aria-hidden="true">↙</span></a>
+        <div class="hero-note"><span class="tiny-flower" aria-hidden="true">✿</span> غرسٌ صغير، وأثرٌ جميل.</div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <span class="art-caption">تنمو بالحبّ. تزهر بالتقدير.</span>
+        <span class="floating-spark spark-one">✧</span><span class="floating-spark spark-two">✧</span>
+      <div class="hero-bouquet" id="heroBouquet" data-flower3d="-1"></div>
+        <div class="hero-message"><span>رسالة من معلّمك</span><b>شكرًا لأنك هنا.</b><i aria-hidden="true">♡</i></div>
+        <span class="garden-ground"></span>
+      </div>
+      <div class="hero-bottom"><span>حديقة أبطال القرآن</span><span class="fine-rule"></span><span>بإهداء من معلّمك عبد الرحمن نصر الله</span></div>
+      <section class="class-section" aria-labelledby="classesTitle">
+        <div class="section-heading"><div><span class="eyebrow">الخطوة الأولى</span><h2 id="classesTitle">في أيّ حديقة تنمو زهرتك؟</h2></div><p>ثلاثة صفوف، وحديقة تجمعنا.</p></div>
+        <div id="classChoices" class="class-grid"></div>
+      </section>
+    </section>
+    <section id="garden" class="garden" hidden aria-labelledby="gardenTitle">
+      <button id="backHome" class="back-button" type="button">→ العودة إلى الصفوف</button>
+      <div class="garden-heading"><div><span class="eyebrow" id="gardenEyebrow">حديقة الصف الأول</span><h1 id="gardenTitle" tabindex="-1">زهرتك تنتظر لمستك.</h1><p>ابحث عن اسمك، والمس زهرتك لتتفتح رسالتك.</p></div><div class="bloom-count"><span aria-hidden="true">✿</span><b id="bloomCount">٠</b><small>زهرة تفتّحت هنا</small></div></div>
+      <div class="garden-toolbar"><label class="search-field"><span aria-hidden="true">⌕</span><input id="searchName" type="search" placeholder="ابحث عن اسمك هنا…" aria-label="ابحث عن اسم الطالب" autocomplete="off"></label><span id="resultCount"></span></div>
+      <div id="flowerGrid" class="flower-grid"></div>
+      <div id="emptyState" class="empty-state" hidden><span aria-hidden="true">❀</span><h2>لنجرب كتابة الاسم بطريقة أخرى.</h2><p>اكتب جزءًا من اسمك، أو تأكد من اختيار صفّك.</p><button id="clearSearch" class="quiet-button" type="button">عرض جميع الأزهار</button></div>
+      <p class="garden-hint"><span aria-hidden="true">♡</span> لكل زهرة لونها… ولكل طالب أثره الجميل.</p>
+    </section>
+  </main>
+  <footer class="site-footer"><span>غراس الأخلاق <i aria-hidden="true">✿</i> نزرع القيم، ونحتفي بكم.</span><small>أزهار التقدير · أبطال القرآن</small></footer>
+  <dialog id="cardDialog" aria-labelledby="cardTitle">
+    <button id="closeCard" class="close-button" type="button" aria-label="إغلاق بطاقة الشكر">×</button>
+    <article id="certificate" class="certificate">
+      <div class="certificate-frame"></div>
+      <span class="corner corner-tr" aria-hidden="true">❦</span><span class="corner corner-bl" aria-hidden="true">❦</span>
+      <img class="school-logo certificate-logo" alt="مدارس غراس الأخلاق" width="110" height="74">
+      <p class="certificate-kicker">غراس الأخلاق · حديقة أبطال القرآن</p>
+      <div id="certificateFlower" class="certificate-flower" aria-hidden="true"></div>
+      <p class="award-eyebrow">بطاقة شكر وتقدير</p>
+      <h2 id="cardTitle">أزهرتَ حضورًا.</h2>
+      <p class="dedication">إلى طالبنا العزيز</p>
+      <h3 id="cardName"></h3>
+      <span id="cardClass" class="class-badge"></span>
+      <p class="certificate-text">شكرًا لحضورك وتفاعلك في حصص القرآن الكريم.<br>بكلّ خطوةٍ تتعلّمها، تنمو زهرة جميلة.<br><strong>بارك الله فيك، وزادك علمًا وخيرًا.</strong></p>
+      <div class="signature"><span>معلّمك المحبّ</span><b>عبد الرحمن نصر الله</b></div>
+      <p class="certificate-footer">لك في حديقتنا زهرة، وفي قلوبنا تقدير.</p>
+    </article>
+    <div class="card-actions"><button id="downloadCard" class="primary" type="button">↓ احفظ بطاقتي</button><button id="printCard" class="secondary" type="button">طباعة البطاقة</button><button id="returnGarden" class="text-button" type="button">العودة إلى الحديقة ←</button></div>
+  </dialog>
+  <canvas id="petalCanvas" aria-hidden="true"></canvas>
+  <div id="status" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
